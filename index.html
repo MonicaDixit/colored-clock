@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: auto;
+      text-align: center;
+    }
+    div.clock {
+      padding: 20px;
+    }
+    span.hour {
+      color: red;
+    }
+    span.min {
+      color: green;
+    }
+    span.sec {
+      color: blue;
+    }
+
+    .btn-grp {
+      margin-top: 1rem;
+    }
+    .btn-grp button {
+      padding: 0.5rem;
+      color: white;
+      background: green;
+    }
+  </style>
+  <body>
+    <div id="clock" class="clock">
+      <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec"
+        >ss</span
+      >
+      <div class="btn-grp">
+        <button class="start-btn">Start</button>
+        <button class="stop-btn">Stop</button>
+      </div>
+    </div>
+    <script>
+      updateTime();
+      let timer = setInterval(updateTime, 1000);
+
+      function updateTime() {
+        let date = new Date();
+        let hours = date.getHours();
+        let mins = date.getMinutes();
+        let secs = date.getSeconds();
+
+        const hour = document.querySelector(".hour");
+        const min = document.querySelector(".min");
+        const sec = document.querySelector(".sec");
+
+        hour.textContent = hours;
+        min.textContent = mins;
+        sec.textContent = secs;
+      }
+
+      let startBtn = document.querySelector(".start-btn");
+      let stopBtn = document.querySelector(".stop-btn");
+
+      startBtn.addEventListener("click", function () {
+        if (!timer) {
+          timer = setInterval(updateTime, 1000);
+        }
+      });
+
+      stopBtn.addEventListener("click", function () {
+        clearInterval(timer);
+        timer = null;
+      });
+    </script>
+  </body>
+</html>
